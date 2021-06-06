@@ -40,7 +40,7 @@ class Product(BaseModel):
     id: Optional[AliasObjectId] = Field(alias='_id')
     name: str
     unitary_price: condecimal(decimal_places=2)
-    stack_size: int = Field(gt=0)
+    stack_size: Optional[int] = Field(gt=0)
 
     class Config:
         arbitrary_types_allowed = True
