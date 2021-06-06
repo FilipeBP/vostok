@@ -1,3 +1,5 @@
 mercos-env
 __pycache__
 .env
+
+.vscode
