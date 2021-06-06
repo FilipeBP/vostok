@@ -30,5 +30,9 @@
     "name": "DL-44 Heavy Blaster Pistol",
     "unitary_price": 1500.00,
     "stack_size": 10
+  },
+  {
+    "name": "Death Star",
+    "unitary_price": 10000500.305
   }
 ]
