@@ -1,4 +1,9 @@
-from pydantic import BaseModel, Field, condecimal
+from pydantic import (
+    BaseModel,
+    Field,
+    validator,
+    condecimal
+)
 
 from utils import AliasObjectId, MongoBaseModel
 from typing import List, Optional
@@ -11,29 +16,46 @@ class Rentability(str, Enum):
     bad = 'bad'
 
 class Item(BaseModel):
-    name: str
-    unitary_price: condecimal(decimal_places=2)
+    product: str
     quantity: int = Field(gt=0)
-    rentability: Rentability
+    unitary_price: condecimal(decimal_places=2)
+    rentability: Optional[Rentability]
+
+    @validator('unitary_price')
+    def must_be_above_zero(cls, v):
+        if v <= 0:
+            raise ValueError('Unitary price must be greater than zero')
+        return v
+
+    @validator('rentability', pre=True, always=True)
+    def must_be_none(cls, v):
+        if v is not None:
+            raise ValueError('Rentability is a field calculated by the server')
+        return v
+
 
 
 class Order(MongoBaseModel):
     id: Optional[AliasObjectId] = Field('_id')
     client: str
     itens: List[Item]
-    created_at: datetime
+    created_at: Optional[datetime]
 
     class Config:
         schema_extra = {
             "example": {
-                "client": "Client.name",
-                "products": [
+                "client": "Yoda Master",
+                "itens": [
                     {
-                        "product": "Doll",
-                        "quantity": "6",
-                        "unitary_price": 320.00,
-                        "rentability": "excellent"
+                    "product": "X-Wing",
+                    "quantity": "6",
+                    "unitary_price": 60001
+                    },
+                    {
+                    "product": "Millenium Falcom",
+                    "quantity": "1",
+                    "unitary_price": 400000.65
                     }
-                ],
+                ]
             }
         }
