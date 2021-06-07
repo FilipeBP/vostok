@@ -13,7 +13,7 @@ async def find_product(id_product: str = None, name: str = None):
     if name:
         product = await collection.find_one(filter={'name': name})
     elif id_product:
-        product = await collection.find_one(filter={'name': name})
+        product = await collection.find_one(filter={'_id': id_product})
 
     if product:
         return product
