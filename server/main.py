@@ -5,11 +5,13 @@ import json
 
 from apps.clients.routers import router as client_router
 from apps.products.routers import router as product_router
+from apps.orders.routers import router as order_router
 
 app = FastAPI()
 
 app.include_router(client_router)
 app.include_router(product_router)
+app.include_router(order_router)
 
 async def filling_collection(collection_name, file_name):
     collections = await db.list_collections()
