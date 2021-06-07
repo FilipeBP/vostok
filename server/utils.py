@@ -1,4 +1,5 @@
-from bson import ObjectId
+import json
+from bson import ObjectId, json_util
 from pydantic.main import BaseModel
 
 # MongoDB needs an '_id' field, however pydantic doesn't allow variables starting with '_'
@@ -26,3 +27,6 @@ class MongoBaseModel(BaseModel):
         json_encoders = {
             ObjectId: str
         }
+
+def parse_json(data):
+    return json.loads(json_util.dumps(data))

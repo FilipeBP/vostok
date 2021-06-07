@@ -29,8 +29,3 @@ async def filling_collection(collection_name, file_name):
 async def filling_collections():
     await filling_collection('clients', 'clients.json')
     await filling_collection('products', 'products.json')
-    
-
-@app.get('/')
-def index():
-    return 'Initial page'
