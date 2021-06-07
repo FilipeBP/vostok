@@ -23,5 +23,4 @@ async def find_client(id_client: str = None, name: str = None):
 
 async def insert_client(client: dict):
     new_client = await collection.insert_one(client)
-    print(type(new_client))
     return await collection.find_one({'_id': new_client.inserted_id})

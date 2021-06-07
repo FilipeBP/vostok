@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 
-from .crud import insert_client, list_clients
+from .crud import find_client, insert_client, list_clients
 from .models import Client
 
 
@@ -23,3 +23,8 @@ async def create_client(client: Client):
     client = jsonable_encoder(client)
     created_client = await insert_client(client)
     return created_client
+
+
+@router.get('/{id}', response_description='Get a client', response_model=Client)
+async def get_client(id: str):
+    return await find_client(id_client=id)
