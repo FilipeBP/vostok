@@ -20,3 +20,8 @@ async def find_client(id_client: str = None, name: str = None):
 
     detail_msg = f"Client {id_client if id_client else name} not found"
     raise HTTPException(status_code=404, detail=detail_msg)
+
+async def insert_client(client: dict):
+    new_client = await collection.insert_one(client)
+    print(type(new_client))
+    return await collection.find_one({'_id': new_client.inserted_id})
