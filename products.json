@@ -1,7 +1,8 @@
 [
   {
     "name": "Millenium Falcon",
-    "unitary_price": 550000.00
+    "unitary_price": 550000.00,
+    "stack_size": 1
   },
   {
     "name": "X-Wing",
@@ -10,7 +11,8 @@
   },
   {
     "name": "Super Star Destroyer",
-    "unitary_price": 4570000.00
+    "unitary_price": 4570000.00,
+    "stack_size": 1
   },
   {
     "name": "TIE Fighter",
@@ -24,7 +26,8 @@
   },
   {
     "name": "DLT-19 Heavy Blaster Rifle",
-    "unitary_price": 5800.00
+    "unitary_price": 5800.00,
+    "stack_size": 1
   },
   {
     "name": "DL-44 Heavy Blaster Pistol",
@@ -33,6 +36,7 @@
   },
   {
     "name": "Death Star",
-    "unitary_price": 10000500.305
+    "unitary_price": 10000500.305,
+    "stack_size": 1
   }
 ]
