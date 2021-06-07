@@ -1,3 +1,4 @@
+from bson import ObjectId
 from pydantic import (
     BaseModel,
     Field,
@@ -36,7 +37,7 @@ class Item(BaseModel):
 
 
 class Order(MongoBaseModel):
-    id: Optional[AliasObjectId] = Field('_id')
+    id: Optional[AliasObjectId] = Field(alias='_id')
     client: str
     itens: List[Item]
     created_at: Optional[datetime]
@@ -48,12 +49,12 @@ class Order(MongoBaseModel):
                 "itens": [
                     {
                     "product": "X-Wing",
-                    "quantity": "6",
+                    "quantity": 6,
                     "unitary_price": 60001
                     },
                     {
-                    "product": "Millenium Falcom",
-                    "quantity": "1",
+                    "product": "Millenium Falcon",
+                    "quantity": 1,
                     "unitary_price": 400000.65
                     }
                 ]
