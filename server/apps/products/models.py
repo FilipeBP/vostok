@@ -7,7 +7,6 @@ from pydantic import Field
 class Product(MongoBaseModel):
     name: str
     unitary_price: condecimal(decimal_places=2)
-    id: Optional[AliasObjectId] = Field(alias='_id')
     stack_size: int = Field(1, gt=0)
 
     class Config:

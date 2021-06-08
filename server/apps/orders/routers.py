@@ -1,11 +1,9 @@
 from fastapi import APIRouter
 from datetime import datetime
 
-from fastapi import HTTPException, status
+from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
-from starlette.responses import JSONResponse
 
-from utils import parse_json
 from .models import Order, Rentability
 from apps.products.crud import find_product
 from apps.clients.crud import find_client
@@ -30,7 +28,7 @@ def calculate_rentability(item_price, product_price):
 
 @router.post('/create', response_description='Add new order', status_code=201)
 async def create_order(order: Order):
-    new_order = order.dict()
+    new_order = jsonable_encoder(order)
     new_order['created_at'] = datetime.now()
     
     # Checks if the client exists in the clients collection
@@ -52,6 +50,5 @@ async def create_order(order: Order):
         item['rentability'] = rentability
     
     # Tries to insert data in the db
-    new_order = parse_json(new_order)
     created_order = await insert_order(new_order)
-    return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_order)
+    return created_order

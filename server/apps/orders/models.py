@@ -1,4 +1,3 @@
-from bson import ObjectId
 from pydantic import (
     BaseModel,
     Field,
@@ -6,7 +5,7 @@ from pydantic import (
     condecimal
 )
 
-from utils import AliasObjectId, MongoBaseModel
+from utils import MongoBaseModel
 from typing import List, Optional
 from enum import Enum
 from datetime import datetime
@@ -15,6 +14,7 @@ class Rentability(str, Enum):
     excellent = 'excellent'
     good = 'good'
     bad = 'bad'
+
 
 class Item(BaseModel):
     product: str
@@ -34,10 +34,8 @@ class Item(BaseModel):
             raise ValueError('Rentability is a field calculated by the server')
         return v
 
-
-
 class Order(MongoBaseModel):
-    id: Optional[AliasObjectId] = Field(alias='_id')
+
     client: str
     itens: List[Item]
     created_at: Optional[datetime]
