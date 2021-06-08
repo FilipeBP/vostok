@@ -28,11 +28,6 @@ class Item(BaseModel):
             raise ValueError('Unitary price must be greater than zero')
         return v
 
-    @validator('rentability', pre=True, always=True)
-    def must_be_none(cls, v):
-        if v is not None:
-            raise ValueError('Rentability is a field calculated by the server')
-        return v
 
 class Order(MongoBaseModel):
 
