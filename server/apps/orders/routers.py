@@ -7,7 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from .models import Order, Rentability
 from apps.products.crud import find_product
 from apps.clients.crud import find_client
-from .crud import insert_order
+from .crud import insert_order, list_orders
 
 router = APIRouter(
     prefix='/orders',
@@ -25,6 +25,14 @@ def calculate_rentability(item_price, product_price):
     else:
         rentability = Rentability.bad
     return rentability
+
+@router.get('/', response_description='List all orders')
+async def get_orders(limit: int = 10):
+    orders = await list_orders(limit)
+    print(orders)
+
+    return orders
+
 
 @router.post('/create', response_description='Add new order', status_code=201)
 async def create_order(order: Order):
