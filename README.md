@@ -1,12 +1,12 @@
 # vostok
 
-## TO IMPLEMENT LIST
+### TO IMPLEMENT LIST
 
 In order:
-- [] Tests
-- [] TDD
-- [] Exception handling
-- [] Docker
-- [] AWS & Kubernets
-- [] Pipeline (CI/CD)
-- [] GraphQL
+- [ ] Tests
+- [ ] TDD
+- [ ] Exception handling
+- [ ] Docker
+- [ ] AWS & Kubernets
+- [ ] Pipeline (CI/CD)
+- [ ] GraphQL
