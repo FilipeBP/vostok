@@ -9,4 +9,3 @@ In order:
 - [ ] Docker
 - [ ] AWS & Kubernets
 - [ ] Pipeline (CI/CD)
-- [ ] GraphQL
