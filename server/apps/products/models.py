@@ -1,7 +1,6 @@
-from utils import AliasObjectId, MongoBaseModel
+from utils import MongoBaseModel
 
 from pydantic.types import condecimal
-from typing import Optional
 from pydantic import Field
 
 class Product(MongoBaseModel):
