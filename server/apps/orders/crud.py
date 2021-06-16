@@ -1,4 +1,5 @@
 from fastapi.exceptions import HTTPException
+from starlette.responses import JSONResponse
 
 from database import db
 from .models import Order
@@ -26,3 +27,11 @@ async def find_order(id_order: str = None, name: str = None):
 
     detail_msg = f"order {id_order if id_order else name} not found"
     raise HTTPException(status_code=404, detail=detail_msg)
+
+async def delete_order(id: str):
+    deleted_order = await collection.delete_one({'_id': id})
+    print(deleted_order)
+
+    if deleted_order.deleted_count == 0:
+        detail_msg = f'Order {id} was not found.'
+        raise HTTPException(status_code=404, detail=detail_msg)

@@ -3,7 +3,6 @@ import json
 from bson import ObjectId
 from decimal import Decimal
 
-from typing import Optional
 from pydantic import BaseModel, Field
 
 # MongoDB needs an '_id' field, however pydantic doesn't allow variables starting with '_'
