@@ -6,36 +6,27 @@ from apps.products.crud import find_product
 
 
 async def process_order(new_order: Order):
-    for item in new_order['itens']:
+    for item in new_order.itens:
         associated_product = await get_associated_product(item)
 
         await check_quantity(item, associated_product)
 
-        item['rentability'] = await get_rentability(item, associated_product)
+        item.rentability = await get_rentability(item, associated_product)
     return new_order
 
-async def get_associated_product(item: dict):
-    return await find_product(name=item['product'])
-
-# async def check_quantity(item: Item, product: Product):
-#     if not item.quantity % product.stack_size == 0:
-#         raise NotMulipleError(product.name, item.quantity, product.stack_size)
+async def get_associated_product(item: Item):
+    product = await find_product(name=item.product)
+    
+    return Product(**product)
 
 async def check_quantity(item: Item, product: Product):
-    if not item['quantity'] % product['stack_size'] == 0:
-        raise NotMulipleError(product['name'], item['quantity'], product['stack_size'])
-
-# async def get_rentability(item: Item, product: Product):
-#     rentability = calculate_rentability(item.unitary_price, product.unitary_price)
-
-#     if item.rentability is not None and item.rentability != rentability:
-#         raise RentabilityError()
-#     return rentability
+    if not item.quantity % product.stack_size == 0:
+        raise NotMulipleError(product.name, item.quantity, product.stack_size)
 
 async def get_rentability(item: Item, product: Product):
-    rentability = calculate_rentability(item['unitary_price'], product['unitary_price'])
+    rentability = calculate_rentability(item.unitary_price, product.unitary_price)
 
-    if item['rentability'] is not None and item['rentability'] != rentability:
+    if item.rentability is not None and item.rentability != rentability:
         raise RentabilityError()
     return rentability
 

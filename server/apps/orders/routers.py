@@ -43,14 +43,14 @@ async def remove_order(id: str):
 
 @router.post('/create', response_description='Add new order', status_code=201)
 async def create_order(order: Order):
-    new_order = jsonable_encoder(order)
-    new_order['created_at'] = datetime.now()
+    order.created_at = datetime.now()
     
     # Checks if the client exists in the clients collection
-    await find_client(name=new_order['client'])
-    
-    processed_order = await process_order(new_order)
+    await find_client(name=order.client)
+    processed_order = await process_order(order)
     
     # Tries to insert data in the db
+    processed_order = jsonable_encoder(processed_order)
     created_order = await insert_order(processed_order)
+    
     return created_order
