@@ -15,7 +15,6 @@ class Rentability(str, Enum):
     good = 'good'
     bad = 'bad'
 
-
 class Item(BaseModel):
     product: str
     quantity: int = Field(gt=0)
@@ -53,3 +52,4 @@ class Order(MongoBaseModel):
                 ]
             }
         }
+
